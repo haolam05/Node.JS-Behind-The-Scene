@@ -71,8 +71,9 @@ console.log('Top level code');
  * 3) Require module:                             fs and crypto
  * 4) Register event callbacks                    setTimeout#1 and setImmediate#1
  *    =>                                        'Timer 1 finished' & 'Immediate 1 finished' & 'I/O finished'
- *    => note that timer#1 and immediate#1 and readFile are order of execution are non-deterministic bc it is bound by the
- *          performance of the process
+ *    => note that timer#1 and immediate#1 and readFile's order of executions are non-deterministic bc it is bound by the
+ *          performance of the process. (we set them 1 line after another and there is no synchronous starting point)
+ *          For timer#2, timer#3, immediate#2, they have synchrnous starting point (at I/O phase)
  *    => so, they will be executed in any random order, but readFile is more likely to be last bc the test-file.txt is huge
  * 5) Start event loop
  *    i)  Expired timer callbacks
